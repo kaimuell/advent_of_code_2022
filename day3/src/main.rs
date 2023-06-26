@@ -1,4 +1,4 @@
-use std::{fs, path::Path, collections::{HashMap, HashSet}};
+use std::{fs, path::Path, collections::{HashSet}};
 
 fn main() {
     let input = fs::read_to_string(Path::new("input")).unwrap();
@@ -12,7 +12,7 @@ fn main() {
 
 fn parse_and_find(input: &str) -> Vec<char> {
     let mut items = Vec::new();
-    for line in input.lines().into_iter() {
+    for line in input.lines() {
         if !line.is_empty() {
             let left = &line[0..(line.len() / 2)];
             let right = &line[(line.len() / 2) ..line.len()];
@@ -25,8 +25,8 @@ fn parse_and_find(input: &str) -> Vec<char> {
 }
 
 fn find_item(left: &str, right: &str) -> Option<char> {
-    for x in left.chars().into_iter(){
-        for y in right.chars().into_iter(){
+    for x in left.chars(){
+        for y in right.chars(){
             if x == y {return Some(x);}
         }
     }
@@ -51,7 +51,7 @@ fn parse_and_find_groups(input: &str) -> Vec<char> {
 }
 
 fn determine_common_item(set0 : &HashSet<char>,set1 : &HashSet<char>,set2 : &HashSet<char>,)-> Option<char>{
-    for c in set0.into_iter(){
+    for c in set0.iter(){
         if set1.contains(&c) && set2.contains(&c){
             return Some(c.clone());
         }
